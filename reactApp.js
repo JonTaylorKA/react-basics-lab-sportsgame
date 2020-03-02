@@ -1,39 +1,50 @@
 // Deafault App component that all other compents are rendered through
 function App(props) {
-    return <Game venue="Thunderdome" />
+  const teamMagic = {
+    name: "Magic",
+    logo: "./assets/images/magic_logo.png"
+  }
+  const teamFlash = {
+    name: "Flash",
+    logo: "./assets/images/utah_flash.gif"
+  }
+  const teamBananas = {
+    name: "Bananas",
+    logo: "./assets/images/bananas.png"
+  }
+  const teamNuts = {
+    name: 'Nuts',
+    logo: "./assets/images/nuts.jpg"
+  }
+    return (<div className='app'>
+      <Game venue="Thunderdome" hometeam={teamMagic} visitors={teamFlash}/>
+      <Game venue="Wrigley Field" hometeam={teamNuts} visitors={teamBananas}/>
+      </div>
+      )
 }
 
-class Game extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            venue: props.venue
-        }
-    }
-
-    render() {
+function Game(props) {
         return (
             <div className="container">
-                <h1>Welcome to {this.state.venue}!</h1>
+                <h1>Welcome to {props.venue}!</h1>
                 <div className="arena">
                     <div className="team">
                       Home Team
                         <Team
-                            name="Magic"
-                            logo="./assets/images/magic_logo.png"
+                            name={props.hometeam.name}
+                            logo={props.hometeam.logo}
                         />
                     </div>
                     <div className="team">
                       Visiting Team
                         <Team
-                            name="Flash"
-                            logo="./assets/images/utah_flash.gif"
+                            name={props.visitors.name}
+                            logo={props.visitors.logo}
                         />
                     </div>
                 </div>
             </div>
         )
-    }
 }
 
 class Team extends React.Component {
